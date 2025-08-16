@@ -1,32 +1,47 @@
-import { Title, Text, Stack, Card, Grid, GridCol, Badge, Group, Button } from '@mantine/core';
-import { IconDatabase, IconApi, IconCode, IconBrandReact } from '@tabler/icons-react';
-import Link from 'next/link';
-import MainLayout from '@/components/Layout/MainLayout';
+import {
+  Title,
+  Text,
+  Stack,
+  Card,
+  Grid,
+  GridCol,
+  Badge,
+  Group,
+  Button,
+} from "@mantine/core";
+import {
+  IconDatabase,
+  IconApi,
+  IconCode,
+  IconBrandReact,
+} from "@tabler/icons-react";
+import Link from "next/link";
+import MainLayout from "@/components/Layout/MainLayout";
 
 const features = [
   {
-    title: 'Next.js 15',
-    description: 'App Routerを使用した最新のNext.jsアプリケーション',
+    title: "Next.js 15",
+    description: "App Routerを使用した最新のNext.jsアプリケーション",
     icon: IconCode,
-    color: 'blue',
+    color: "blue",
   },
   {
-    title: 'Mantine v8',
-    description: 'モダンなReact UIライブラリ',
+    title: "Mantine v8",
+    description: "モダンなReact UIライブラリ",
     icon: IconBrandReact,
-    color: 'green',
+    color: "green",
   },
   {
-    title: 'Prisma ORM',
-    description: 'MariaDBとの連携を実現する型安全なORM',
+    title: "Prisma ORM",
+    description: "MariaDBとの連携を実現する型安全なORM",
     icon: IconDatabase,
-    color: 'violet',
+    color: "violet",
   },
   {
-    title: 'API Routes',
-    description: '取得系処理と更新系処理の分離設計',
+    title: "API Routes",
+    description: "取得系処理と更新系処理の分離設計",
     icon: IconApi,
-    color: 'orange',
+    color: "orange",
   },
 ];
 
@@ -39,7 +54,8 @@ export default function Home() {
             Next.js Template
           </Title>
           <Text size="lg" c="dimmed">
-            Next.js 15 + Mantine v8 + Prisma を使用したモダンなWebアプリケーションテンプレート
+            Next.js 15 + Mantine v8 + Prisma
+            を使用したモダンなWebアプリケーションテンプレート
           </Text>
         </div>
 

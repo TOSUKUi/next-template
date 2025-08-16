@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Table,
   Paper,
@@ -13,8 +13,8 @@ import {
   Button,
   Stack,
   TextInput,
-} from '@mantine/core';
-import { IconDotsVertical, IconSearch, IconFilter } from '@tabler/icons-react';
+} from "@mantine/core";
+import { IconDotsVertical, IconSearch, IconFilter } from "@tabler/icons-react";
 
 interface Column<T> {
   key: keyof T | string;
@@ -52,9 +52,9 @@ export default function DataTable<T extends Record<string, any>>({
   onSearch,
   actions,
   loading = false,
-  emptyMessage = 'データがありません',
+  emptyMessage = "データがありません",
 }: DataTableProps<T>) {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const handleSearch = () => {
     if (onSearch) {
@@ -63,8 +63,8 @@ export default function DataTable<T extends Record<string, any>>({
   };
 
   const getValue = (row: T, key: keyof T | string): any => {
-    if (typeof key === 'string' && key.includes('.')) {
-      return key.split('.').reduce((obj, prop) => obj?.[prop], row);
+    if (typeof key === "string" && key.includes(".")) {
+      return key.split(".").reduce((obj, prop) => obj?.[prop], row);
     }
     return row[key as keyof T];
   };
@@ -78,13 +78,16 @@ export default function DataTable<T extends Record<string, any>>({
             value={searchValue}
             onChange={(event) => setSearchValue(event.currentTarget.value)}
             onKeyDown={(event) => {
-              if (event.key === 'Enter') {
+              if (event.key === "Enter") {
                 handleSearch();
               }
             }}
             leftSection={<IconSearch size="1rem" />}
           />
-          <Button onClick={handleSearch} leftSection={<IconSearch size="1rem" />}>
+          <Button
+            onClick={handleSearch}
+            leftSection={<IconSearch size="1rem" />}
+          >
             検索
           </Button>
         </Group>
@@ -126,7 +129,9 @@ export default function DataTable<T extends Record<string, any>>({
                     const value = getValue(row, column.key);
                     return (
                       <Table.Td key={String(column.key)}>
-                        {column.render ? column.render(row, value) : String(value || '-')}
+                        {column.render
+                          ? column.render(row, value)
+                          : String(value || "-")}
                       </Table.Td>
                     );
                   })}
@@ -153,25 +158,27 @@ export default function DataTable<T extends Record<string, any>>({
         <Group justify="space-between">
           <Group>
             <Text size="sm" c="dimmed">
-              {pagination.total}件中 {(pagination.page - 1) * pagination.limit + 1}-
-              {Math.min(pagination.page * pagination.limit, pagination.total)}件を表示
+              {pagination.total}件中{" "}
+              {(pagination.page - 1) * pagination.limit + 1}-
+              {Math.min(pagination.page * pagination.limit, pagination.total)}
+              件を表示
             </Text>
             {onLimitChange && (
               <Select
                 data={[
-                  { value: '10', label: '10件' },
-                  { value: '25', label: '25件' },
-                  { value: '50', label: '50件' },
-                  { value: '100', label: '100件' },
+                  { value: "10", label: "10件" },
+                  { value: "25", label: "25件" },
+                  { value: "50", label: "50件" },
+                  { value: "100", label: "100件" },
                 ]}
                 value={String(pagination.limit)}
-                onChange={(value) => onLimitChange(parseInt(value || '10'))}
+                onChange={(value) => onLimitChange(parseInt(value || "10"))}
                 size="sm"
                 w={80}
               />
             )}
           </Group>
-          
+
           {onPageChange && (
             <Pagination
               value={pagination.page}

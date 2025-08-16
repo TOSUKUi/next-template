@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import './lib/env'; // 環境変数の早期バリデーション
+import "./lib/env"; // 環境変数の早期バリデーション
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   experimental: {
     // Server Actionsを有効化（Next.js 15では安定版）
     serverActions: {
-      allowedOrigins: ['localhost:3000'],
+      allowedOrigins: ["localhost:3000"],
     },
   },
 };

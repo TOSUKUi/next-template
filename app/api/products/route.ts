@@ -1,34 +1,34 @@
-import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '10');
-    const search = searchParams.get('search') || '';
-    const category = searchParams.get('category') || '';
-    const minPrice = searchParams.get('minPrice');
-    const maxPrice = searchParams.get('maxPrice');
-    const sortBy = searchParams.get('sortBy') || 'createdAt';
-    const sortOrder = searchParams.get('sortOrder') || 'desc';
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const search = searchParams.get("search") || "";
+    const category = searchParams.get("category") || "";
+    const minPrice = searchParams.get("minPrice");
+    const maxPrice = searchParams.get("maxPrice");
+    const sortBy = searchParams.get("sortBy") || "createdAt";
+    const sortOrder = searchParams.get("sortOrder") || "desc";
 
     const skip = (page - 1) * limit;
     const take = Math.min(limit, 100);
 
     const where: any = {};
-    
+
     if (search) {
       where.OR = [
         { name: { contains: search } },
         { description: { contains: search } },
       ];
     }
-    
+
     if (category) {
       where.category = category;
     }
-    
+
     if (minPrice || maxPrice) {
       where.price = {};
       if (minPrice) where.price.gte = parseFloat(minPrice);
@@ -36,10 +36,10 @@ export async function GET(request: NextRequest) {
     }
 
     const orderBy: any = {};
-    if (['createdAt', 'updatedAt', 'price', 'name'].includes(sortBy)) {
-      orderBy[sortBy] = sortOrder === 'asc' ? 'asc' : 'desc';
+    if (["createdAt", "updatedAt", "price", "name"].includes(sortBy)) {
+      orderBy[sortBy] = sortOrder === "asc" ? "asc" : "desc";
     } else {
-      orderBy.createdAt = 'desc';
+      orderBy.createdAt = "desc";
     }
 
     const [products, total] = await Promise.all([
@@ -92,14 +92,14 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error fetching products:', error);
-    
+    console.error("Error fetching products:", error);
+
     return NextResponse.json(
       {
-        error: '商品一覧の取得に失敗しました',
-        details: process.env.NODE_ENV === 'development' ? error : undefined,
+        error: "商品一覧の取得に失敗しました",
+        details: process.env.NODE_ENV === "development" ? error : undefined,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

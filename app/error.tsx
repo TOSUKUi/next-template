@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Button, Container, Stack, Text, Title, Alert } from '@mantine/core';
-import { IconAlertCircle, IconRefresh } from '@tabler/icons-react';
-import { useEffect } from 'react';
+import { Button, Container, Stack, Text, Title, Alert } from "@mantine/core";
+import { IconAlertCircle, IconRefresh } from "@tabler/icons-react";
+import { useEffect } from "react";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -27,13 +27,13 @@ export default function Error({ error, reset }: ErrorProps) {
           <Text size="sm" mb="md">
             申し訳ございません。予期しないエラーが発生しました。
           </Text>
-          {process.env.NODE_ENV === 'development' && (
-            <Text size="xs" c="dimmed" style={{ fontFamily: 'monospace' }}>
+          {process.env.NODE_ENV === "development" && (
+            <Text size="xs" c="dimmed" style={{ fontFamily: "monospace" }}>
               {error.message}
             </Text>
           )}
         </Alert>
-        
+
         <Button
           variant="light"
           leftSection={<IconRefresh size={16} />}

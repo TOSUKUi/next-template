@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
@@ -33,21 +33,21 @@ export async function GET(
 
     if (!product) {
       return NextResponse.json(
-        { error: '商品が見つかりません' },
-        { status: 404 }
+        { error: "商品が見つかりません" },
+        { status: 404 },
       );
     }
 
     return NextResponse.json({ product });
   } catch (error) {
-    console.error('Error fetching product:', error);
-    
+    console.error("Error fetching product:", error);
+
     return NextResponse.json(
       {
-        error: '商品情報の取得に失敗しました',
-        details: process.env.NODE_ENV === 'development' ? error : undefined,
+        error: "商品情報の取得に失敗しました",
+        details: process.env.NODE_ENV === "development" ? error : undefined,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

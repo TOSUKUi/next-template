@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useActionState } from 'react';
-import { Modal, Button, Text, Group, Alert, Stack } from '@mantine/core';
-import { IconAlertCircle, IconTrash } from '@tabler/icons-react';
+import { useActionState } from "react";
+import { Modal, Button, Text, Group, Alert, Stack } from "@mantine/core";
+import { IconAlertCircle, IconTrash } from "@tabler/icons-react";
 
 interface DeleteModalProps {
   opened: boolean;
@@ -23,10 +23,12 @@ export default function DeleteModal({
   itemId,
   itemName,
 }: DeleteModalProps) {
-  const [state, formAction, pending] = useActionState(action, { success: false });
+  const [state, formAction, pending] = useActionState(action, {
+    success: false,
+  });
 
   const handleSubmit = async (formData: FormData) => {
-    formData.append('id', itemId);
+    formData.append("id", itemId);
     await formAction(formData);
     if (state.success) {
       onClose();
@@ -39,16 +41,11 @@ export default function DeleteModal({
         <Text size="sm" c="dimmed">
           {description}
         </Text>
-        
-        <Text fw={500}>
-          「{itemName}」を削除しますか？
-        </Text>
+
+        <Text fw={500}>「{itemName}」を削除しますか？</Text>
 
         {state.errors?._form && (
-          <Alert
-            icon={<IconAlertCircle size="1rem" />}
-            color="red"
-          >
+          <Alert icon={<IconAlertCircle size="1rem" />} color="red">
             {state.errors._form[0]}
           </Alert>
         )}

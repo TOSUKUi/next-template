@@ -1,21 +1,27 @@
-'use client';
+"use client";
 
-import { AppShell, Burger, Group, Text, NavLink, Stack } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconHome, IconUser, IconShoppingBag, IconSettings, IconHeartbeat } from '@tabler/icons-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { AppShell, Burger, Group, Text, NavLink, Stack } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  IconHome,
+  IconUser,
+  IconShoppingBag,
+  IconSettings,
+  IconHeartbeat,
+} from "@tabler/icons-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 const navigation = [
-  { label: 'ホーム', href: '/', icon: IconHome },
-  { label: 'ユーザー', href: '/users', icon: IconUser },
-  { label: '商品', href: '/products', icon: IconShoppingBag },
-  { label: '設定', href: '/settings', icon: IconSettings },
-  { label: 'ヘルス', href: '/health', icon: IconHeartbeat },
+  { label: "ホーム", href: "/", icon: IconHome },
+  { label: "ユーザー", href: "/users", icon: IconUser },
+  { label: "商品", href: "/products", icon: IconShoppingBag },
+  { label: "設定", href: "/settings", icon: IconSettings },
+  { label: "ヘルス", href: "/health", icon: IconHeartbeat },
 ];
 
 export default function MainLayout({ children }: MainLayoutProps) {
@@ -27,7 +33,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       header={{ height: 60 }}
       navbar={{
         width: 300,
-        breakpoint: 'sm',
+        breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
       padding="md"

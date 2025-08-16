@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useActionState } from 'react';
+import { useActionState } from "react";
 import {
   Box,
   Button,
@@ -11,33 +11,40 @@ import {
   Paper,
   Title,
   Group,
-} from '@mantine/core';
-import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
-import { createUser, CreateUserFormState } from '@/app/actions/users/create-user';
-import { updateUser, UpdateUserFormState } from '@/app/actions/users/update-user';
+} from "@mantine/core";
+import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
+import {
+  createUser,
+  CreateUserFormState,
+} from "@/app/actions/users/create-user";
+import {
+  updateUser,
+  UpdateUserFormState,
+} from "@/app/actions/users/update-user";
 
 interface UserFormProps {
-  mode: 'create' | 'update';
+  mode: "create" | "update";
   initialData?: {
     id?: string;
     name?: string;
     email?: string;
-    role?: 'user' | 'admin';
+    role?: "user" | "admin";
   };
   onSuccess?: () => void;
 }
 
-export default function UserForm({ mode, initialData, onSuccess }: UserFormProps) {
+export default function UserForm({
+  mode,
+  initialData,
+  onSuccess,
+}: UserFormProps) {
   const [state, formAction, pending] = useActionState<
     CreateUserFormState | UpdateUserFormState
-  >(
-    mode === 'create' ? createUser : updateUser,
-    { success: false }
-  );
+  >(mode === "create" ? createUser : updateUser, { success: false });
 
   const handleSubmit = async (formData: FormData) => {
-    if (mode === 'update' && initialData?.id) {
-      formData.append('id', initialData.id);
+    if (mode === "update" && initialData?.id) {
+      formData.append("id", initialData.id);
     }
     await formAction(formData);
     if (state.success && onSuccess) {
@@ -48,7 +55,7 @@ export default function UserForm({ mode, initialData, onSuccess }: UserFormProps
   return (
     <Paper p="md" withBorder>
       <Title order={3} mb="md">
-        {mode === 'create' ? 'ユーザー作成' : 'ユーザー更新'}
+        {mode === "create" ? "ユーザー作成" : "ユーザー更新"}
       </Title>
 
       {state.success && (
@@ -63,11 +70,7 @@ export default function UserForm({ mode, initialData, onSuccess }: UserFormProps
       )}
 
       {state.errors?._form && (
-        <Alert
-          icon={<IconAlertCircle size="1rem" />}
-          color="red"
-          mb="md"
-        >
+        <Alert icon={<IconAlertCircle size="1rem" />} color="red" mb="md">
           {state.errors._form[0]}
         </Alert>
       )}
@@ -91,7 +94,7 @@ export default function UserForm({ mode, initialData, onSuccess }: UserFormProps
             required
           />
 
-          {mode === 'create' && (
+          {mode === "create" && (
             <TextInput
               label="パスワード"
               name="password"
@@ -105,17 +108,17 @@ export default function UserForm({ mode, initialData, onSuccess }: UserFormProps
             label="ロール"
             name="role"
             data={[
-              { value: 'user', label: 'ユーザー' },
-              { value: 'admin', label: '管理者' },
+              { value: "user", label: "ユーザー" },
+              { value: "admin", label: "管理者" },
             ]}
-            defaultValue={initialData?.role || 'user'}
+            defaultValue={initialData?.role || "user"}
             error={state.errors?.role?.[0]}
             required
           />
 
           <Group justify="flex-end">
             <Button type="submit" loading={pending}>
-              {mode === 'create' ? '作成' : '更新'}
+              {mode === "create" ? "作成" : "更新"}
             </Button>
           </Group>
         </Stack>

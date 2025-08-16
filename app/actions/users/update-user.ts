@@ -1,14 +1,17 @@
-'use server';
+"use server";
 
-import { z } from 'zod';
-import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import { z } from "zod";
+import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 const UpdateUserSchema = z.object({
   id: z.string().cuid(),
-  name: z.string().min(1, '名前は必須です').max(255, '名前は255文字以内で入力してください'),
-  email: z.string().email('有効なメールアドレスを入力してください').max(255),
-  role: z.enum(['user', 'admin']),
+  name: z
+    .string()
+    .min(1, "名前は必須です")
+    .max(255, "名前は255文字以内で入力してください"),
+  email: z.string().email("有効なメールアドレスを入力してください").max(255),
+  role: z.enum(["user", "admin"]),
 });
 
 export type UpdateUserFormState = {
@@ -24,13 +27,13 @@ export type UpdateUserFormState = {
 
 export async function updateUser(
   prevState: UpdateUserFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<UpdateUserFormState> {
   const validatedFields = UpdateUserSchema.safeParse({
-    id: formData.get('id'),
-    name: formData.get('name'),
-    email: formData.get('email'),
-    role: formData.get('role'),
+    id: formData.get("id"),
+    name: formData.get("name"),
+    email: formData.get("email"),
+    role: formData.get("role"),
   });
 
   if (!validatedFields.success) {
@@ -50,7 +53,7 @@ export async function updateUser(
     if (!existingUser) {
       return {
         errors: {
-          _form: ['ユーザーが見つかりません'],
+          _form: ["ユーザーが見つかりません"],
         },
       };
     }
@@ -64,7 +67,7 @@ export async function updateUser(
       if (emailExists) {
         return {
           errors: {
-            email: ['このメールアドレスは既に使用されています'],
+            email: ["このメールアドレスは既に使用されています"],
           },
         };
       }
@@ -87,8 +90,8 @@ export async function updateUser(
       },
     });
 
-    revalidatePath('/users');
-    revalidatePath('/admin/users');
+    revalidatePath("/users");
+    revalidatePath("/admin/users");
     revalidatePath(`/users/${id}`);
 
     return {
@@ -96,11 +99,11 @@ export async function updateUser(
       message: `ユーザー「${updatedUser.name}」を更新しました`,
     };
   } catch (error) {
-    console.error('Error updating user:', error);
-    
+    console.error("Error updating user:", error);
+
     return {
       errors: {
-        _form: ['ユーザーの更新に失敗しました。もう一度お試しください。'],
+        _form: ["ユーザーの更新に失敗しました。もう一度お試しください。"],
       },
     };
   }

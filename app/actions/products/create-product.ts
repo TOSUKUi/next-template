@@ -1,16 +1,29 @@
-'use server';
+"use server";
 
-import { z } from 'zod';
-import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import { z } from "zod";
+import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 const CreateProductSchema = z.object({
-  name: z.string().min(1, '商品名は必須です').max(255, '商品名は255文字以内で入力してください'),
-  description: z.string().max(1000, '説明は1000文字以内で入力してください').optional(),
-  price: z.coerce.number().min(0, '価格は0以上で入力してください'),
-  stock: z.coerce.number().int().min(0, '在庫数は0以上の整数で入力してください').default(0),
-  category: z.string().max(100, 'カテゴリは100文字以内で入力してください').optional(),
-  image: z.string().url('有効なURLを入力してください').optional(),
+  name: z
+    .string()
+    .min(1, "商品名は必須です")
+    .max(255, "商品名は255文字以内で入力してください"),
+  description: z
+    .string()
+    .max(1000, "説明は1000文字以内で入力してください")
+    .optional(),
+  price: z.coerce.number().min(0, "価格は0以上で入力してください"),
+  stock: z.coerce
+    .number()
+    .int()
+    .min(0, "在庫数は0以上の整数で入力してください")
+    .default(0),
+  category: z
+    .string()
+    .max(100, "カテゴリは100文字以内で入力してください")
+    .optional(),
+  image: z.string().url("有効なURLを入力してください").optional(),
   userId: z.string().cuid(),
 });
 
@@ -31,16 +44,16 @@ export type CreateProductFormState = {
 
 export async function createProduct(
   prevState: CreateProductFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<CreateProductFormState> {
   const validatedFields = CreateProductSchema.safeParse({
-    name: formData.get('name'),
-    description: formData.get('description'),
-    price: formData.get('price'),
-    stock: formData.get('stock'),
-    category: formData.get('category'),
-    image: formData.get('image'),
-    userId: formData.get('userId'),
+    name: formData.get("name"),
+    description: formData.get("description"),
+    price: formData.get("price"),
+    stock: formData.get("stock"),
+    category: formData.get("category"),
+    image: formData.get("image"),
+    userId: formData.get("userId"),
   });
 
   if (!validatedFields.success) {
@@ -49,7 +62,8 @@ export async function createProduct(
     };
   }
 
-  const { name, description, price, stock, category, image, userId } = validatedFields.data;
+  const { name, description, price, stock, category, image, userId } =
+    validatedFields.data;
 
   try {
     // ユーザー存在チェック
@@ -61,7 +75,7 @@ export async function createProduct(
     if (!user) {
       return {
         errors: {
-          userId: ['指定されたユーザーが見つかりません'],
+          userId: ["指定されたユーザーが見つかりません"],
         },
       };
     }
@@ -90,8 +104,8 @@ export async function createProduct(
       },
     });
 
-    revalidatePath('/products');
-    revalidatePath('/admin/products');
+    revalidatePath("/products");
+    revalidatePath("/admin/products");
     revalidatePath(`/users/${userId}`);
 
     return {
@@ -99,11 +113,11 @@ export async function createProduct(
       message: `商品「${product.name}」を作成しました`,
     };
   } catch (error) {
-    console.error('Error creating product:', error);
-    
+    console.error("Error creating product:", error);
+
     return {
       errors: {
-        _form: ['商品の作成に失敗しました。もう一度お試しください。'],
+        _form: ["商品の作成に失敗しました。もう一度お試しください。"],
       },
     };
   }

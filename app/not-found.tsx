@@ -1,6 +1,6 @@
-import { Button, Container, Stack, Text, Title } from '@mantine/core';
-import { IconHome, IconArrowLeft } from '@tabler/icons-react';
-import Link from 'next/link';
+import { Button, Container, Stack, Text, Title } from "@mantine/core";
+import { IconHome, IconArrowLeft } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -17,7 +17,7 @@ export default function NotFound() {
             お探しのページは存在しないか、移動された可能性があります。
           </Text>
         </Stack>
-        
+
         <Button
           component={Link}
           href="/"

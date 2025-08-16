@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useActionState } from 'react';
+import { useActionState } from "react";
 import {
   Box,
   Button,
@@ -12,13 +12,19 @@ import {
   Paper,
   Title,
   Group,
-} from '@mantine/core';
-import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
-import { createProduct, CreateProductFormState } from '@/app/actions/products/create-product';
-import { updateProduct, UpdateProductFormState } from '@/app/actions/products/update-product';
+} from "@mantine/core";
+import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
+import {
+  createProduct,
+  CreateProductFormState,
+} from "@/app/actions/products/create-product";
+import {
+  updateProduct,
+  UpdateProductFormState,
+} from "@/app/actions/products/update-product";
 
 interface ProductFormProps {
-  mode: 'create' | 'update';
+  mode: "create" | "update";
   userId: string;
   initialData?: {
     id?: string;
@@ -32,19 +38,21 @@ interface ProductFormProps {
   onSuccess?: () => void;
 }
 
-export default function ProductForm({ mode, userId, initialData, onSuccess }: ProductFormProps) {
+export default function ProductForm({
+  mode,
+  userId,
+  initialData,
+  onSuccess,
+}: ProductFormProps) {
   const [state, formAction, pending] = useActionState<
     CreateProductFormState | UpdateProductFormState
-  >(
-    mode === 'create' ? createProduct : updateProduct,
-    { success: false }
-  );
+  >(mode === "create" ? createProduct : updateProduct, { success: false });
 
   const handleSubmit = async (formData: FormData) => {
-    if (mode === 'create') {
-      formData.append('userId', userId);
-    } else if (mode === 'update' && initialData?.id) {
-      formData.append('id', initialData.id);
+    if (mode === "create") {
+      formData.append("userId", userId);
+    } else if (mode === "update" && initialData?.id) {
+      formData.append("id", initialData.id);
     }
     await formAction(formData);
     if (state.success && onSuccess) {
@@ -55,25 +63,17 @@ export default function ProductForm({ mode, userId, initialData, onSuccess }: Pr
   return (
     <Paper p="md" withBorder>
       <Title order={3} mb="md">
-        {mode === 'create' ? '商品作成' : '商品更新'}
+        {mode === "create" ? "商品作成" : "商品更新"}
       </Title>
 
       {state.success && (
-        <Alert
-          icon={<IconCheck size="1rem" />}
-          color="green"
-          mb="md"
-        >
+        <Alert icon={<IconCheck size="1rem" />} color="green" mb="md">
           {state.message}
         </Alert>
       )}
 
       {state.errors?._form && (
-        <Alert
-          icon={<IconAlertCircle size="1rem" />}
-          color="red"
-          mb="md"
-        >
+        <Alert icon={<IconAlertCircle size="1rem" />} color="red" mb="md">
           {state.errors._form[0]}
         </Alert>
       )}
@@ -132,7 +132,7 @@ export default function ProductForm({ mode, userId, initialData, onSuccess }: Pr
 
           <Group justify="flex-end">
             <Button type="submit" loading={pending}>
-              {mode === 'create' ? '作成' : '更新'}
+              {mode === "create" ? "作成" : "更新"}
             </Button>
           </Group>
         </Stack>

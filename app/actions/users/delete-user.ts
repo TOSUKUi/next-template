@@ -1,8 +1,8 @@
-'use server';
+"use server";
 
-import { z } from 'zod';
-import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import { z } from "zod";
+import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 const DeleteUserSchema = z.object({
   id: z.string().cuid(),
@@ -18,16 +18,16 @@ export type DeleteUserFormState = {
 
 export async function deleteUser(
   prevState: DeleteUserFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<DeleteUserFormState> {
   const validatedFields = DeleteUserSchema.safeParse({
-    id: formData.get('id'),
+    id: formData.get("id"),
   });
 
   if (!validatedFields.success) {
     return {
       errors: {
-        _form: ['無効なユーザーIDです'],
+        _form: ["無効なユーザーIDです"],
       },
     };
   }
@@ -53,7 +53,7 @@ export async function deleteUser(
     if (!user) {
       return {
         errors: {
-          _form: ['ユーザーが見つかりません'],
+          _form: ["ユーザーが見つかりません"],
         },
       };
     }
@@ -74,19 +74,19 @@ export async function deleteUser(
       where: { id },
     });
 
-    revalidatePath('/users');
-    revalidatePath('/admin/users');
+    revalidatePath("/users");
+    revalidatePath("/admin/users");
 
     return {
       success: true,
       message: `ユーザー「${user.name}」を削除しました`,
     };
   } catch (error) {
-    console.error('Error deleting user:', error);
-    
+    console.error("Error deleting user:", error);
+
     return {
       errors: {
-        _form: ['ユーザーの削除に失敗しました。もう一度お試しください。'],
+        _form: ["ユーザーの削除に失敗しました。もう一度お試しください。"],
       },
     };
   }
