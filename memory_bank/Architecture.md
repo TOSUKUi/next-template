@@ -1,6 +1,7 @@
 # Next.js Template Architecture
 
-このドキュメントは、`next-template`プロジェクトのアーキテクチャ、主要な技術選定、そして開発者が従うべき規約について解説します。
+このドキュメントは、`next-template`プロジェクトのアーキテクチャ、主要な技術選定について解説します。
+開発プロセスや規約については、[EngineeringManual.md](EngineeringManual.md)を参照してください。
 
 ## 1. プロジェクト概要
 
