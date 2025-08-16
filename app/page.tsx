@@ -1,4 +1,4 @@
-import { Title, Text, Stack, Card, Grid, Badge, Group, Button } from '@mantine/core';
+import { Title, Text, Stack, Card, Grid, GridCol, Badge, Group, Button } from '@mantine/core';
 import { IconDatabase, IconApi, IconCode, IconBrandReact } from '@tabler/icons-react';
 import Link from 'next/link';
 import MainLayout from '@/components/Layout/MainLayout';
@@ -44,22 +44,25 @@ export default function Home() {
         </div>
 
         <Grid>
-          {features.map((feature, index) => (
-            <Grid.Col key={index} span={{ base: 12, md: 6 }}>
-              <Card shadow="sm" padding="md" radius="md" withBorder h="100%">
-                <Group mb="xs">
-                  <feature.icon size="1.5rem" />
-                  <Title order={4}>{feature.title}</Title>
-                  <Badge color={feature.color} size="sm">
-                    実装済み
-                  </Badge>
-                </Group>
-                <Text size="sm" c="dimmed">
-                  {feature.description}
-                </Text>
-              </Card>
-            </Grid.Col>
-          ))}
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <GridCol key={index} span={{ base: 12, md: 6 }}>
+                <Card shadow="sm" padding="md" radius="md" withBorder h="100%">
+                  <Group mb="xs">
+                    <IconComponent size="1.5rem" />
+                    <Title order={4}>{feature.title}</Title>
+                    <Badge color={feature.color} size="sm">
+                      実装済み
+                    </Badge>
+                  </Group>
+                  <Text size="sm" c="dimmed">
+                    {feature.description}
+                  </Text>
+                </Card>
+              </GridCol>
+            );
+          })}
         </Grid>
 
         <Card shadow="sm" padding="lg" radius="md" withBorder>

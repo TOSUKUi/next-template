@@ -43,17 +43,20 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
       <AppShell.Navbar p="md">
         <Stack gap="xs">
-          {navigation.map((item) => (
-            <NavLink
-              key={item.href}
-              component={Link}
-              href={item.href}
-              label={item.label}
-              leftSection={<item.icon size="1rem" />}
-              active={pathname === item.href}
-              variant="filled"
-            />
-          ))}
+          {navigation.map((item) => {
+            const IconComponent = item.icon;
+            return (
+              <NavLink
+                key={item.href}
+                component={Link}
+                href={item.href}
+                label={item.label}
+                leftSection={<IconComponent size="1rem" />}
+                active={pathname === item.href}
+                variant="filled"
+              />
+            );
+          })}
         </Stack>
       </AppShell.Navbar>
 

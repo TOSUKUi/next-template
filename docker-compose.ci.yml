@@ -1,0 +1,17 @@
+# CI環境用のDocker Compose設定
+version: '3.8'
+
+services:
+  app:
+    environment:
+      - NODE_ENV=production
+    command: sh -c "npm ci && npm run build && npm run start"
+    
+  playwright:
+    environment:
+      - CI=true
+    command: npx playwright test --reporter=html --output-dir=playwright-report
+    volumes:
+      - .:/work
+      - ./playwright-report:/work/playwright-report
+      - ./test-results:/work/test-results

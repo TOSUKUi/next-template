@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+import React from 'react';
 import { Notifications } from '@mantine/notifications';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { Geist, Geist_Mono } from "next/font/google";
 import theme from '../lib/theme';
 import "./globals.css";
-import '@mantine/core/styles.css';
-import '@mantine/notifications/styles.css';
+import type { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

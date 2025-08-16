@@ -11,6 +11,8 @@ services:
     environment:
       - NODE_ENV=development
       - DATABASE_URL=mysql://next_user:next_password@mariadb:3306/next_template
+      - JWT_SECRET=f2631f7c30f6261da86f704d8ac17e8f65cd2146d55a95a876627731a5cd0e61
+      - PORT=3000
     depends_on:
       - mariadb
       - redis
@@ -18,6 +20,11 @@ services:
       - .:/app
       - /app/node_modules
     command: npm run dev
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', res => process.exit(res.statusCode===200?0:1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
   mariadb:
     image: mariadb:10.11
@@ -41,6 +48,26 @@ services:
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
+
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.54.0-noble
+    container_name: next-template-playwright
+    working_dir: /work
+    ipc: host
+    environment:
+      - NODE_ENV=test
+      - PLAYWRIGHT_TEST_BASE_URL=http://app.target:3000
+    depends_on:
+      - app
+    extra_hosts:
+      - "app.target:host-gateway"
+    links:
+      - "app:app.target"
+    volumes:
+      - .:/work
+      - ./playwright-report:/work/playwright-report
+      - ./test-results:/work/test-results
+    command: sh -c "npm ci && npx playwright test"
 
 volumes:
   mariadb_data:
