@@ -12,8 +12,9 @@ alwaysApply: true
 
 プロジェクトに関する主要なドキュメントは以下の通りです。
 
-- **[Engineering Manual](memory_bank/EngineeringManual.md)**
+- **[Engineering Manual](memory_bank/EngineeringManual.md)** ⚠️ **必読**
   - 開発環境、コーディング規約、テスト方針、CI/CDなど、開発プロセス全般のルールを定義しています。
+  - **このプロジェクトで作業する際は必ず最初に読んでください。**
 
 - **[Architecture Guide](memory_bank/Architecture.md)**
   - ディレクトリ構成、コンポーネント設計、状態管理、データ取得など、アプリケーションの設計思想について解説しています。

@@ -23,6 +23,17 @@ docker compose exec app npm install
 
 詳細は[Architecture.md](Architecture.md)の「データフロー」セクションを参照してください。
 
+### Client Component最小化ルール
+**RSCの恩恵を最大限活用するため、以下を厳守**
+
+- **page.tsx は原則 Server Component を維持**
+  - データフェッチはサーバー側で実行
+  - 初期表示速度・SEO・バンドルサイズを最適化
+- **Client化対象**: 検索フォーム、ボタンクリック等の最小限のUI部品のみ
+- **データフェッチ**: Server Component で実行し、props で Client に渡す
+- **状態管理**: Server Actions使用を優先、どうしても必要な場合のみ Client内で
+- **アンチパターン**: page.tsx全体を `'use client'` 化（バンドル肥大化・RSC恩恵喪失）
+
 ### テスト駆動開発
 1. 失敗するテストを先に作成
 2. 最小限の実装でテスト通過
@@ -106,7 +117,7 @@ curl -f http://localhost:3000/search
 curl -f http://localhost:3000/admin
 ```
 
-## 📋 タスク管理
+## 📋 タスク管理 再開に必要なコンテキストもここに入る ※必ずこのフローに従って行動計画、承認要求、実装を行うこと
 
 ### 複雑なタスク向けプロセス
 以下に該当する場合、進捗管理ファイル(`memory_bank/progresses/YYYYMMDDHHMMSS-<タスク名>.md`)を作成:
