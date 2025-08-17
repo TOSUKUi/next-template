@@ -11,7 +11,6 @@ import {
 } from "@mantine/core";
 import {
   IconDatabase,
-  IconApi,
   IconCode,
   IconBrandReact,
 } from "@tabler/icons-react";
@@ -36,12 +35,6 @@ const features = [
     description: "MariaDBとの連携を実現する型安全なORM",
     icon: IconDatabase,
     color: "violet",
-  },
-  {
-    title: "API Routes",
-    description: "取得系処理と更新系処理の分離設計",
-    icon: IconApi,
-    color: "orange",
   },
 ];
 
@@ -87,9 +80,6 @@ export default function Home() {
             <Group>
               <Button component={Link} href="/users" variant="filled">
                 ユーザー管理
-              </Button>
-              <Button component={Link} href="/products" variant="filled">
-                商品管理
               </Button>
               <Button component={Link} href="/api/health" variant="outline">
                 ヘルスチェック
