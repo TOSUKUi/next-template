@@ -1,9 +1,9 @@
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
-import type React from "react";
-import { Notifications } from "@mantine/notifications";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { Geist, Geist_Mono } from "next/font/google";
+import type React from "react";
 import theme from "../lib/theme";
 import "./globals.css";
 import type { Metadata } from "next";

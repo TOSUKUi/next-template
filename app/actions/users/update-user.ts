@@ -1,8 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
 
 const UpdateUserSchema = z.object({
   id: z.string().cuid(),

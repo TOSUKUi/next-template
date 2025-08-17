@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
@@ -12,7 +12,12 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
     const take = Math.min(limit, 100); // 最大100件まで
 
-    const where: any = {};
+    const where: {
+      OR?: Array<
+        { name?: { contains: string } } | { email?: { contains: string } }
+      >;
+      role?: string;
+    } = {};
 
     if (search) {
       where.OR = [
@@ -37,12 +42,6 @@ export async function GET(request: NextRequest) {
           role: true,
           createdAt: true,
           updatedAt: true,
-          _count: {
-            select: {
-              posts: true,
-              products: true,
-            },
-          },
         },
         orderBy: {
           createdAt: "desc",

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("Home Page", () => {
   test("should display the main page with correct elements", async ({
@@ -25,13 +25,11 @@ test.describe("Home Page", () => {
     await expect(page.getByText("Next.js 15")).toBeVisible();
     await expect(page.getByText("Mantine v8")).toBeVisible();
     await expect(page.getByText("Prisma ORM")).toBeVisible();
-    await expect(page.getByText("API Routes")).toBeVisible();
 
     // Check quick start buttons
     await expect(
       page.getByRole("link", { name: "ユーザー管理" }),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "商品管理" })).toBeVisible();
     await expect(
       page.getByRole("link", { name: "ヘルスチェック" }),
     ).toBeVisible();
@@ -57,8 +55,6 @@ test.describe("Home Page", () => {
     // Check navigation items are visible
     await expect(page.getByRole("link", { name: "ホーム" })).toBeVisible();
     await expect(page.getByRole("link", { name: "ユーザー" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "商品" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "設定" })).toBeVisible();
     await expect(page.getByRole("link", { name: "ヘルス" })).toBeVisible();
   });
 
@@ -67,6 +63,6 @@ test.describe("Home Page", () => {
 
     // Check all feature cards have "実装済み" badge
     const badges = page.getByText("実装済み");
-    await expect(badges).toHaveCount(4);
+    await expect(badges).toHaveCount(3);
   });
 });

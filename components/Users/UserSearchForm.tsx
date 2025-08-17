@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { Group, TextInput, Select, Button } from "@mantine/core";
+import { Button, Group, Select, TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function UserSearchForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [role, setRole] = useState(searchParams.get("role") || "");
 
@@ -16,7 +16,7 @@ export default function UserSearchForm() {
     const params = new URLSearchParams();
     if (search) params.set("search", search);
     if (role) params.set("role", role);
-    
+
     router.push(`/users?${params.toString()}`);
   };
 

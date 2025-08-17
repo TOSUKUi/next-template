@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Container, Stack, Text, Title, Alert } from "@mantine/core";
+import { Alert, Button, Container, Stack, Text } from "@mantine/core";
 import { IconAlertCircle, IconRefresh } from "@tabler/icons-react";
 import { useEffect } from "react";
 

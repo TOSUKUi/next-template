@@ -1,20 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import {
-  Table,
-  Paper,
-  Group,
-  Text,
-  Pagination,
-  Select,
   ActionIcon,
-  Menu,
   Button,
+  Group,
+  Menu,
+  Pagination,
+  Paper,
+  Select,
   Stack,
+  Table,
+  Text,
   TextInput,
 } from "@mantine/core";
-import { IconDotsVertical, IconSearch, IconFilter } from "@tabler/icons-react";
+import { IconDotsVertical, IconFilter, IconSearch } from "@tabler/icons-react";
+import { useState } from "react";
 
 interface Column<T> {
   key: keyof T | string;

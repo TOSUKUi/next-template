@@ -1,9 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
-import { revalidatePath } from "next/cache";
-import bcrypt from "bcryptjs";
 
 const CreateUserSchema = z.object({
   name: z
@@ -47,7 +46,7 @@ export async function createUser(
     };
   }
 
-  const { name, email, password, role } = validatedFields.data;
+  const { name, email, role } = validatedFields.data;
 
   try {
     // メールアドレスの重複チェック
@@ -62,9 +61,6 @@ export async function createUser(
         },
       };
     }
-
-    // パスワードのハッシュ化
-    const hashedPassword = await bcrypt.hash(password, 12);
 
     // ユーザー作成
     const user = await prisma.user.create({

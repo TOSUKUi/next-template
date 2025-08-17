@@ -1,6 +1,6 @@
 "use client";
 
-import { Table, Badge, Group, Button, Text, Pagination } from "@mantine/core";
+import { Badge, Button, Group, Pagination, Table, Text } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
@@ -11,10 +11,6 @@ interface User {
   role: string;
   createdAt: string;
   updatedAt: string;
-  _count: {
-    posts: number;
-    products: number;
-  };
 }
 
 interface UserTableProps {
@@ -34,9 +30,9 @@ export default function UserTable({ users, pagination }: UserTableProps) {
 
   const getRoleBadgeColor = (role: string) => {
     switch (role) {
-      case "ADMIN":
+      case "admin":
         return "red";
-      case "USER":
+      case "user":
         return "blue";
       default:
         return "gray";
@@ -65,8 +61,6 @@ export default function UserTable({ users, pagination }: UserTableProps) {
             <Table.Th>名前</Table.Th>
             <Table.Th>メールアドレス</Table.Th>
             <Table.Th>ロール</Table.Th>
-            <Table.Th>投稿数</Table.Th>
-            <Table.Th>商品数</Table.Th>
             <Table.Th>登録日</Table.Th>
             <Table.Th>操作</Table.Th>
           </Table.Tr>
@@ -80,11 +74,9 @@ export default function UserTable({ users, pagination }: UserTableProps) {
               <Table.Td>{user.email}</Table.Td>
               <Table.Td>
                 <Badge color={getRoleBadgeColor(user.role)} size="sm">
-                  {user.role === "ADMIN" ? "管理者" : "一般ユーザー"}
+                  {user.role === "admin" ? "管理者" : "一般ユーザー"}
                 </Badge>
               </Table.Td>
-              <Table.Td>{user._count.posts}</Table.Td>
-              <Table.Td>{user._count.products}</Table.Td>
               <Table.Td>{formatDate(user.createdAt)}</Table.Td>
               <Table.Td>
                 <Group gap="xs">

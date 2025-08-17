@@ -1,14 +1,14 @@
-import { Suspense } from "react";
 import {
-  Container,
-  Title,
-  Text,
-  Stack,
-  Card,
   Button,
+  Card,
+  Container,
   Group,
+  Stack,
+  Text,
+  Title,
 } from "@mantine/core";
 import Link from "next/link";
+import { Suspense } from "react";
 
 // 人工的に遅延させるコンポーネント
 async function SlowComponent() {

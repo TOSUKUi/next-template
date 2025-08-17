@@ -1,14 +1,8 @@
 "use client";
 
-import { AppShell, Burger, Group, Text, NavLink, Stack } from "@mantine/core";
+import { AppShell, Burger, Group, NavLink, Stack, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  IconHome,
-  IconUser,
-  IconShoppingBag,
-  IconSettings,
-  IconHeartbeat,
-} from "@tabler/icons-react";
+import { IconHeartbeat, IconHome, IconUser } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -19,9 +13,7 @@ interface MainLayoutProps {
 const navigation = [
   { label: "ホーム", href: "/", icon: IconHome },
   { label: "ユーザー", href: "/users", icon: IconUser },
-  { label: "商品", href: "/products", icon: IconShoppingBag },
-  { label: "設定", href: "/settings", icon: IconSettings },
-  { label: "ヘルス", href: "/health", icon: IconHeartbeat },
+  { label: "ヘルス", href: "/api/health", icon: IconHeartbeat },
 ];
 
 export default function MainLayout({ children }: MainLayoutProps) {

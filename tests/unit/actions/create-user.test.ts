@@ -1,6 +1,6 @@
+import bcrypt from "bcryptjs";
 import { createUser } from "@/app/actions/users/create-user";
 import prisma from "@/lib/prisma";
-import bcrypt from "bcryptjs";
 
 jest.mock("@/lib/prisma");
 jest.mock("bcryptjs");

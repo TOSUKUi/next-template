@@ -1,8 +1,8 @@
 "use client";
 
-import { useActionState } from "react";
-import { Modal, Button, Text, Group, Alert, Stack } from "@mantine/core";
+import { Alert, Button, Group, Modal, Stack, Text } from "@mantine/core";
 import { IconAlertCircle, IconTrash } from "@tabler/icons-react";
+import { useActionState } from "react";
 
 interface DeleteModalProps {
   opened: boolean;

@@ -1,5 +1,5 @@
 import { Button, Container, Stack, Text, Title } from "@mantine/core";
-import { IconHome, IconArrowLeft } from "@tabler/icons-react";
+import { IconHome } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function NotFound() {

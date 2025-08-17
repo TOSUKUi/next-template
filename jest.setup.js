@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { TextEncoder, TextDecoder } from "util";
+import { TextDecoder, TextEncoder } from "util";
 import "whatwg-fetch";
 
 // Polyfills for Node.js environment

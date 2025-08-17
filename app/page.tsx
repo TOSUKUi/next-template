@@ -1,19 +1,15 @@
 import {
-  Title,
-  Text,
-  Stack,
+  Badge,
+  Button,
   Card,
   Grid,
   GridCol,
-  Badge,
   Group,
-  Button,
+  Stack,
+  Text,
+  Title,
 } from "@mantine/core";
-import {
-  IconDatabase,
-  IconCode,
-  IconBrandReact,
-} from "@tabler/icons-react";
+import { IconBrandReact, IconCode, IconDatabase } from "@tabler/icons-react";
 import Link from "next/link";
 import MainLayout from "@/components/Layout/MainLayout";
 

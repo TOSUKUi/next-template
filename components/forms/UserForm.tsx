@@ -1,25 +1,24 @@
 "use client";
 
-import { useActionState } from "react";
 import {
-  Box,
+  Alert,
   Button,
-  TextInput,
+  Group,
+  Paper,
   Select,
   Stack,
-  Alert,
-  Paper,
+  TextInput,
   Title,
-  Group,
 } from "@mantine/core";
 import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
+import { useActionState } from "react";
 import {
+  type CreateUserFormState,
   createUser,
-  CreateUserFormState,
 } from "@/app/actions/users/create-user";
 import {
+  type UpdateUserFormState,
   updateUser,
-  UpdateUserFormState,
 } from "@/app/actions/users/update-user";
 
 interface UserFormProps {

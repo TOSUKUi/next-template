@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("Loading UI Tests", () => {
   test("should display loading UI on test-loading page", async ({ page }) => {

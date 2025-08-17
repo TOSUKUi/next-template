@@ -1,5 +1,5 @@
-import { Title, Text, Stack, Card, Group, Button, Alert } from "@mantine/core";
-import { IconPlus, IconAlertCircle } from "@tabler/icons-react";
+import { Alert, Button, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { IconAlertCircle, IconPlus } from "@tabler/icons-react";
 import MainLayout from "@/components/Layout/MainLayout";
 import UserSearchForm from "@/components/Users/UserSearchForm";
 import UserTable from "@/components/Users/UserTable";
@@ -11,10 +11,6 @@ interface User {
   role: string;
   createdAt: string;
   updatedAt: string;
-  _count: {
-    posts: number;
-    products: number;
-  };
 }
 
 interface UserResponse {
@@ -32,24 +28,27 @@ interface UserResponse {
 async function fetchUsers(searchParams: { [key: string]: string | undefined }) {
   try {
     const params = new URLSearchParams();
-    
+
     // デフォルト値の設定
     params.set("page", searchParams.page || "1");
     params.set("limit", searchParams.limit || "10");
-    
+
     // 検索パラメータの追加
     if (searchParams.search) params.set("search", searchParams.search);
     if (searchParams.role) params.set("role", searchParams.role);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/users?${params}`, {
-      cache: 'no-store' // Always get fresh data
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/users?${params}`,
+      {
+        cache: "no-store", // Always get fresh data
+      },
+    );
 
     if (!response.ok) {
       throw new Error("ユーザー一覧の取得に失敗しました");
     }
 
-    return await response.json() as UserResponse;
+    return (await response.json()) as UserResponse;
   } catch (error) {
     console.error("Error fetching users:", error);
     return {
@@ -62,7 +61,7 @@ async function fetchUsers(searchParams: { [key: string]: string | undefined }) {
         hasNext: false,
         hasPrev: false,
       },
-      error: error instanceof Error ? error.message : "エラーが発生しました"
+      error: error instanceof Error ? error.message : "エラーが発生しました",
     };
   }
 }
