@@ -64,7 +64,7 @@ export default function DataTable<T extends Record<string, unknown>>({
 
   const getValue = (row: T, key: keyof T | string): unknown => {
     if (typeof key === "string" && key.includes(".")) {
-      return key.split(".").reduce((obj, prop) => obj?.[prop], row);
+      return key.split(".").reduce((obj, prop) => obj?.[prop], row as Record<string, unknown>);
     }
     return row[key as keyof T];
   };
@@ -98,11 +98,11 @@ export default function DataTable<T extends Record<string, unknown>>({
           <Table.Thead>
             <Table.Tr>
               {columns.map((column) => (
-                <Table.Th key={String(column.key)} width={column.width}>
+                <Table.Th key={String(column.key)} style={{ width: column.width }}>
                   {column.label}
                 </Table.Th>
               ))}
-              {actions && <Table.Th width={80}>操作</Table.Th>}
+              {actions && <Table.Th style={{ width: 80 }}>操作</Table.Th>}
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
@@ -124,7 +124,7 @@ export default function DataTable<T extends Record<string, unknown>>({
               </Table.Tr>
             ) : (
               data.map((row, index) => (
-                <Table.Tr key={row.id || index}>
+                <Table.Tr key={(row as { id?: string }).id || index}>
                   {columns.map((column) => {
                     const value = getValue(row, column.key);
                     return (

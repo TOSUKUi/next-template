@@ -30,6 +30,12 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
 
+  /* Set timeout for test actions */
+  timeout: 60000, // 60 seconds for individual test
+  expect: {
+    timeout: 30000, // 30 seconds for expect assertions
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {

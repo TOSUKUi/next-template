@@ -86,25 +86,29 @@ jest.mock("next/navigation", () => ({
 }));
 
 // Mock Prisma
+const mockPrismaUser = {
+  findMany: jest.fn(),
+  findUnique: jest.fn(),
+  create: jest.fn(),
+  update: jest.fn(),
+  delete: jest.fn(),
+  count: jest.fn(),
+};
+
+const mockPrismaProduct = {
+  findMany: jest.fn(),
+  findUnique: jest.fn(),
+  create: jest.fn(),
+  update: jest.fn(),
+  delete: jest.fn(),
+  count: jest.fn(),
+};
+
 jest.mock("./lib/prisma", () => ({
   __esModule: true,
   default: {
-    user: {
-      findMany: jest.fn(),
-      findUnique: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-      count: jest.fn(),
-    },
-    product: {
-      findMany: jest.fn(),
-      findUnique: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-      delete: jest.fn(),
-      count: jest.fn(),
-    },
+    user: mockPrismaUser,
+    product: mockPrismaProduct,
     $queryRaw: jest.fn(),
   },
 }));

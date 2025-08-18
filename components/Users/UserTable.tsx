@@ -3,6 +3,9 @@
 import { Badge, Button, Group, Pagination, Table, Text } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import DeleteModal from "@/components/ui/DeleteModal";
+import { deleteUser } from "@/app/actions/users/delete-user";
 
 interface User {
   id: string;
@@ -27,6 +30,18 @@ interface UserTableProps {
 
 export default function UserTable({ users, pagination }: UserTableProps) {
   const router = useRouter();
+  const [deleteModalOpened, setDeleteModalOpened] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  const handleDeleteClick = (user: User) => {
+    setSelectedUser(user);
+    setDeleteModalOpened(true);
+  };
+
+  const handleDeleteModalClose = () => {
+    setDeleteModalOpened(false);
+    setSelectedUser(null);
+  };
 
   const getRoleBadgeColor = (role: string) => {
     switch (role) {
@@ -93,6 +108,7 @@ export default function UserTable({ users, pagination }: UserTableProps) {
                     color="red"
                     variant="light"
                     leftSection={<IconTrash size="0.8rem" />}
+                    onClick={() => handleDeleteClick(user)}
                   >
                     削除
                   </Button>
@@ -118,6 +134,16 @@ export default function UserTable({ users, pagination }: UserTableProps) {
           />
         </Group>
       )}
+
+      <DeleteModal
+        opened={deleteModalOpened}
+        onClose={handleDeleteModalClose}
+        title="ユーザー削除"
+        description="この操作は取り消すことができません。"
+        action={deleteUser as any}
+        itemId={selectedUser?.id || ""}
+        itemName={selectedUser?.name || ""}
+      />
     </div>
   );
 }

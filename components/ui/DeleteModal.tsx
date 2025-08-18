@@ -25,11 +25,11 @@ export default function DeleteModal({
 }: DeleteModalProps) {
   const [state, formAction, pending] = useActionState(action, {
     success: false,
-  });
+  } as { success: boolean; errors?: { _form?: string[] } });
 
   const handleSubmit = async (formData: FormData) => {
     formData.append("id", itemId);
-    await formAction(formData);
+    formAction(formData);
     if (state.success) {
       onClose();
     }

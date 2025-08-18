@@ -37,15 +37,16 @@ export default function UserForm({
   initialData,
   onSuccess,
 }: UserFormProps) {
-  const [state, formAction, pending] = useActionState<
-    CreateUserFormState | UpdateUserFormState
-  >(mode === "create" ? createUser : updateUser, { success: false });
+  const [state, formAction, pending] = useActionState(
+    mode === "create" ? createUser : updateUser, 
+    { success: false } as CreateUserFormState | UpdateUserFormState
+  );
 
   const handleSubmit = async (formData: FormData) => {
     if (mode === "update" && initialData?.id) {
       formData.append("id", initialData.id);
     }
-    await formAction(formData);
+    formAction(formData);
     if (state.success && onSuccess) {
       onSuccess();
     }
@@ -98,7 +99,11 @@ export default function UserForm({
               label="パスワード"
               name="password"
               type="password"
-              error={state.errors?.password?.[0]}
+              error={
+                mode === "create" && "password" in (state.errors || {})
+                  ? (state.errors as { password?: string[] })?.password?.[0]
+                  : undefined
+              }
               required
             />
           )}

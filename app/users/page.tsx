@@ -1,5 +1,6 @@
 import { Alert, Button, Card, Group, Stack, Text, Title } from "@mantine/core";
 import { IconAlertCircle, IconPlus } from "@tabler/icons-react";
+import Link from "next/link";
 import MainLayout from "@/components/Layout/MainLayout";
 import UserSearchForm from "@/components/Users/UserSearchForm";
 import UserTable from "@/components/Users/UserTable";
@@ -21,7 +22,11 @@ export default async function UsersPage({
             <Title order={1}>ユーザー管理</Title>
             <Text c="dimmed">登録されているユーザーの一覧と管理</Text>
           </div>
-          <Button leftSection={<IconPlus size="1rem" />}>
+          <Button 
+            component={Link}
+            href="/users/new"
+            leftSection={<IconPlus size="1rem" />}
+          >
             新規ユーザー追加
           </Button>
         </Group>

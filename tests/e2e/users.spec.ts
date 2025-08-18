@@ -12,7 +12,7 @@ test.describe("Users Management", () => {
     await expect(page.getByText("登録されているユーザーの一覧と管理")).toBeVisible();
 
     // Check "新規ユーザー追加" button
-    await expect(page.getByRole("button", { name: "新規ユーザー追加" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "新規ユーザー追加" })).toBeVisible();
 
     // Check search form elements
     await expect(page.getByRole("textbox", { name: "名前またはメールアドレスで検索" })).toBeVisible();
@@ -91,6 +91,79 @@ test.describe("Users Management", () => {
     
     // Should display "no results" message
     await expect(page.getByText("検索条件に一致するユーザーが見つかりませんでした")).toBeVisible();
+  });
+
+  test("should display delete modal when delete button is clicked", async ({ page }) => {
+    // Wait for table to load
+    await page.getByRole("table").waitFor();
+    
+    // Check if there are any delete buttons (users exist)
+    const deleteButtons = page.getByRole("button", { name: "削除" });
+    const deleteButtonCount = await deleteButtons.count();
+    
+    if (deleteButtonCount > 0) {
+      // Click the first delete button
+      await deleteButtons.first().click();
+      
+      // Should show delete modal
+      await expect(page.getByText("ユーザー削除")).toBeVisible();
+      await expect(page.getByText("この操作は取り消すことができません。")).toBeVisible();
+      
+      // Should have cancel and delete buttons in modal
+      await expect(page.getByRole("button", { name: "キャンセル" })).toBeVisible();
+      await expect(page.getByLabel("ユーザー削除").getByRole("button", { name: "削除" })).toBeVisible();
+      
+      // Close modal with cancel
+      await page.getByRole("button", { name: "キャンセル" }).click();
+      
+      // Modal should be closed
+      await expect(page.getByText("ユーザー削除")).not.toBeVisible();
+    }
+  });
+  test("should navigate to new user page when 新規ユーザー追加 is clicked", async ({ page }) => {
+    // Click the "新規ユーザー追加" link
+    await page.getByRole("link", { name: "新規ユーザー追加" }).click();
+    
+    // Should navigate to new user page
+    await expect(page).toHaveURL("/users/new");
+    
+    // Check new user page elements
+    await expect(page.getByRole("heading", { name: "新規ユーザー作成" })).toBeVisible();
+    await expect(page.getByText("新しいユーザーを登録します")).toBeVisible();
+    await expect(page.getByRole("link", { name: "ユーザー一覧に戻る" })).toBeVisible();
+  });
+});
+
+test.describe("New User Page", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/users/new");
+  });
+
+  test("should display new user page with form elements", async ({ page }) => {
+    // Check page title and description
+    await expect(page.getByRole("heading", { name: "新規ユーザー作成" })).toBeVisible();
+    await expect(page.getByText("新しいユーザーを登録します")).toBeVisible();
+
+    // Check form elements exist
+    await expect(page.getByText("名前")).toBeVisible();
+    await expect(page.getByText("メールアドレス")).toBeVisible();
+    await expect(page.getByText("パスワード")).toBeVisible();
+    await expect(page.getByText("ロール")).toBeVisible();
+
+    // Check form has create button
+    await expect(page.getByRole("button", { name: "作成" })).toBeVisible();
+
+    // Check back button
+    await expect(page.getByRole("link", { name: "ユーザー一覧に戻る" })).toBeVisible();
+  });
+
+  test("should allow navigation back to users list", async ({ page }) => {
+    // Click back button
+    await page.getByRole("link", { name: "ユーザー一覧に戻る" }).click();
+    
+    // Should be back on users page
+    await expect(page).toHaveURL("/users");
+    await expect(page.getByRole("heading", { name: "ユーザー管理" })).toBeVisible();
   });
 });
 
