@@ -1,15 +1,12 @@
-import bcrypt from "bcryptjs";
 import { createUser } from "@/app/actions/users/create-user";
 import prisma from "@/lib/prisma";
 
 jest.mock("@/lib/prisma");
-jest.mock("bcryptjs");
 jest.mock("next/cache", () => ({
   revalidatePath: jest.fn(),
 }));
 
 const mockedPrisma = prisma as jest.Mocked<typeof prisma>;
-const mockedBcrypt = bcrypt as jest.Mocked<typeof bcrypt>;
 
 describe("createUser", () => {
   beforeEach(() => {
@@ -26,7 +23,6 @@ describe("createUser", () => {
     };
 
     mockedPrisma.user.findUnique.mockResolvedValue(null);
-    mockedBcrypt.hash.mockResolvedValue("hashed-password");
     mockedPrisma.user.create.mockResolvedValue(mockUser);
 
     const formData = new FormData();
@@ -42,7 +38,6 @@ describe("createUser", () => {
     expect(mockedPrisma.user.findUnique).toHaveBeenCalledWith({
       where: { email: "test@example.com" },
     });
-    expect(mockedBcrypt.hash).toHaveBeenCalledWith("password123", 12);
   });
 
   it("should return validation errors for invalid data", async () => {

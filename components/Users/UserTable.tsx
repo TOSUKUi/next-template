@@ -54,7 +54,7 @@ export default function UserTable({ users, pagination }: UserTableProps) {
   };
 
   return (
-    <>
+    <div data-testid="user-table">
       <Table striped highlightOnHover>
         <Table.Thead>
           <Table.Tr>
@@ -84,6 +84,7 @@ export default function UserTable({ users, pagination }: UserTableProps) {
                     size="xs"
                     variant="light"
                     leftSection={<IconEdit size="0.8rem" />}
+                    onClick={() => router.push(`/users/${user.id}`)}
                   >
                     編集
                   </Button>
@@ -117,6 +118,6 @@ export default function UserTable({ users, pagination }: UserTableProps) {
           />
         </Group>
       )}
-    </>
+    </div>
   );
 }

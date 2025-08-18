@@ -1,0 +1,8 @@
+{
+  "hooks": {
+    "TodoWrite": {
+      "command": "bash -c 'TIMESTAMP=$(date \"+%Y-%m-%d %H:%M:%S\"); echo \"[$TIMESTAMP] TodoWrite更新: 進捗ファイルを確認・更新してください\" >> memory_bank/progresses/latest_progress.log; mkdir -p memory_bank/progresses'",
+      "description": "TodoWrite実行時に進捗ログを自動記録し、progressesディレクトリを確保"
+    }
+  }
+}

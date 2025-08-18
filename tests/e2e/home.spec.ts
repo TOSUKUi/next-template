@@ -22,9 +22,9 @@ test.describe("Home Page", () => {
     ).toBeVisible();
 
     // Check feature cards
-    await expect(page.getByText("Next.js 15")).toBeVisible();
-    await expect(page.getByText("Mantine v8")).toBeVisible();
-    await expect(page.getByText("Prisma ORM")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Next.js 15" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Mantine v8" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Prisma ORM" })).toBeVisible();
 
     // Check quick start buttons
     await expect(
@@ -52,10 +52,10 @@ test.describe("Home Page", () => {
   test("should have responsive navigation", async ({ page }) => {
     await page.goto("/");
 
-    // Check navigation items are visible
-    await expect(page.getByRole("link", { name: "ホーム" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "ユーザー" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "ヘルス" })).toBeVisible();
+    // Check navigation items are visible (using first occurrence)
+    await expect(page.getByRole("link", { name: "ホーム" }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "ユーザー" }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "ヘルス" }).first()).toBeVisible();
   });
 
   test("should display all implementation badges", async ({ page }) => {

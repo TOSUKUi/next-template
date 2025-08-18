@@ -9,7 +9,7 @@ interface DeleteModalProps {
   onClose: () => void;
   title: string;
   description: string;
-  action: (prevState: any, formData: FormData) => Promise<any>;
+  action: (prevState: unknown, formData: FormData) => Promise<unknown>;
   itemId: string;
   itemName: string;
 }

@@ -27,7 +27,7 @@ export default function UserSearchForm() {
   };
 
   return (
-    <Group mb="md">
+    <Group mb="md" data-testid="user-search-form">
       <TextInput
         placeholder="名前またはメールアドレスで検索"
         leftSection={<IconSearch size="1rem" />}
@@ -40,8 +40,8 @@ export default function UserSearchForm() {
         placeholder="ロールで絞り込み"
         data={[
           { value: "", label: "すべて" },
-          { value: "ADMIN", label: "管理者" },
-          { value: "USER", label: "一般ユーザー" },
+          { value: "admin", label: "管理者" },
+          { value: "user", label: "一般ユーザー" },
         ]}
         value={role}
         onChange={(value) => setRole(value || "")}

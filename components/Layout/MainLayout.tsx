@@ -29,6 +29,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         collapsed: { mobile: !opened },
       }}
       padding="md"
+      data-testid="main-layout"
     >
       <AppShell.Header>
         <Group h="100%" px="md">

@@ -13,13 +13,13 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { IconDotsVertical, IconFilter, IconSearch } from "@tabler/icons-react";
+import { IconDotsVertical, IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 
 interface Column<T> {
   key: keyof T | string;
   label: string;
-  render?: (row: T, value: any) => React.ReactNode;
+  render?: (row: T, value: unknown) => React.ReactNode;
   sortable?: boolean;
   width?: string | number;
 }
@@ -43,7 +43,7 @@ interface DataTableProps<T> {
   emptyMessage?: string;
 }
 
-export default function DataTable<T extends Record<string, any>>({
+export default function DataTable<T extends Record<string, unknown>>({
   data,
   columns,
   pagination,
@@ -62,7 +62,7 @@ export default function DataTable<T extends Record<string, any>>({
     }
   };
 
-  const getValue = (row: T, key: keyof T | string): any => {
+  const getValue = (row: T, key: keyof T | string): unknown => {
     if (typeof key === "string" && key.includes(".")) {
       return key.split(".").reduce((obj, prop) => obj?.[prop], row);
     }

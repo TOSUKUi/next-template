@@ -21,3 +21,10 @@ alwaysApply: true
 
 - **[Mantine UI Guide](memory_bank/MantineGuide.md)**
   - 本プロジェクトで採用しているUIフレームワーク`Mantine`の利用方法、特にNext.jsのApp Router/RSC環境での使い分けについて詳しく説明しています。
+
+# 🚨 CRITICAL: Progress File Management
+**TodoWriteツールを使用する場合は必ず進捗ファイルを作成**:
+1. TodoWriteツール実行前に`memory_bank/progresses/YYYYMMDDHHMMSS-<タスク名>.md`を作成
+2. 複数ファイル編集が予想される場合は事前に進捗ファイル作成
+3. 進捗ファイルなしでTodoWriteツールを使用することは禁止
+4. 詳細は[Engineering Manual](memory_bank/EngineeringManual.md)の「🚨 進捗ファイル作成必須ルール」を参照

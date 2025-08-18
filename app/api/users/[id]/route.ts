@@ -17,41 +17,6 @@ export async function GET(
         role: true,
         createdAt: true,
         updatedAt: true,
-        posts: {
-          select: {
-            id: true,
-            title: true,
-            content: true,
-            published: true,
-            createdAt: true,
-            updatedAt: true,
-          },
-          orderBy: {
-            createdAt: "desc",
-          },
-        },
-        products: {
-          select: {
-            id: true,
-            name: true,
-            description: true,
-            price: true,
-            category: true,
-            image: true,
-            createdAt: true,
-            updatedAt: true,
-          },
-          orderBy: {
-            createdAt: "desc",
-          },
-        },
-        _count: {
-          select: {
-            posts: true,
-            products: true,
-            sessions: true,
-          },
-        },
       },
     });
 

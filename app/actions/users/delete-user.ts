@@ -41,12 +41,6 @@ export async function deleteUser(
       select: {
         id: true,
         name: true,
-        _count: {
-          select: {
-            posts: true,
-            products: true,
-          },
-        },
       },
     });
 
@@ -54,17 +48,6 @@ export async function deleteUser(
       return {
         errors: {
           _form: ["ユーザーが見つかりません"],
-        },
-      };
-    }
-
-    // 関連データがある場合の警告
-    if (user._count.posts > 0 || user._count.products > 0) {
-      return {
-        errors: {
-          _form: [
-            `このユーザーには関連データ（投稿: ${user._count.posts}件、商品: ${user._count.products}件）があるため削除できません。先に関連データを削除してください。`,
-          ],
         },
       };
     }
