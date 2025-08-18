@@ -9,23 +9,10 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import { Suspense } from "react";
+import { SlowComponent } from "./SlowComponent";
+import { ReloadButton } from "./ReloadButton";
 
-// 人工的に遅延させるコンポーネント
-async function SlowComponent() {
-  // 3秒待機してローディング状態を確認
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
-  return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Title order={3} c="green">
-        データ読み込み完了！
-      </Title>
-      <Text c="dimmed" mt="sm">
-        3秒の遅延後に表示されるコンテンツです。
-      </Text>
-    </Card>
-  );
-}
+// Note: SlowComponentを別ファイルに移動してClient Componentとして実装
 
 export default function TestLoadingPage() {
   return (
@@ -55,9 +42,7 @@ export default function TestLoadingPage() {
         </Suspense>
 
         <Group>
-          <Button component={Link} href="/test-loading" variant="filled">
-            ローディングテスト開始（ページリロード）
-          </Button>
+          <ReloadButton />
           <Button component={Link} href="/" variant="light">
             ホームに戻る
           </Button>
