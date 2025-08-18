@@ -140,7 +140,7 @@ export default function UserTable({ users, pagination }: UserTableProps) {
         onClose={handleDeleteModalClose}
         title="ユーザー削除"
         description="この操作は取り消すことができません。"
-        action={deleteUser as any}
+        action={deleteUser}
         itemId={selectedUser?.id || ""}
         itemName={selectedUser?.name || ""}
       />

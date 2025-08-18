@@ -1,8 +1,8 @@
 import { Button, Card, Group, Stack, Text, Title } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
-import MainLayout from "@/components/Layout/MainLayout";
-import UserForm from "@/components/forms/UserForm";
+import MainLayout from "@/components/layout/MainLayout";
+import UserForm from "../[id]/_components/UserForm";
 
 export default function NewUserPage() {
   return (

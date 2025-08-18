@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MantineProvider } from "@mantine/core";
 import { useActionState } from "react";
-import UserForm from "@/components/forms/UserForm";
+import UserForm from "@/app/users/[id]/_components/UserForm";
 
 // Mock the server actions
 jest.mock("@/app/actions/users/create-user", () => ({

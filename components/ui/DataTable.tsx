@@ -64,7 +64,12 @@ export default function DataTable<T extends Record<string, unknown>>({
 
   const getValue = (row: T, key: keyof T | string): unknown => {
     if (typeof key === "string" && key.includes(".")) {
-      return key.split(".").reduce((obj, prop) => obj?.[prop], row as Record<string, unknown>);
+      return key
+        .split(".")
+        .reduce<unknown>(
+          (obj, prop) => (obj as Record<string, unknown>)?.[prop],
+          row as Record<string, unknown>,
+        );
     }
     return row[key as keyof T];
   };

@@ -2,8 +2,8 @@ import { Alert, Button, Card, Group, Stack, Text, Title } from "@mantine/core";
 import { IconAlertCircle, IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import MainLayout from "@/components/Layout/MainLayout";
-import UserForm from "@/components/forms/UserForm";
+import MainLayout from "@/components/layout/MainLayout";
+import UserForm from "./_components/UserForm";
 
 interface User {
   id: string;

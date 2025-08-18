@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { IconBrandReact, IconCode, IconDatabase } from "@tabler/icons-react";
 import Link from "next/link";
-import MainLayout from "@/components/Layout/MainLayout";
+import MainLayout from "@/components/layout/MainLayout";
 
 const features = [
   {

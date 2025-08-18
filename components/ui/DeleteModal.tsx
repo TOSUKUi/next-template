@@ -4,12 +4,17 @@ import { Alert, Button, Group, Modal, Stack, Text } from "@mantine/core";
 import { IconAlertCircle, IconTrash } from "@tabler/icons-react";
 import { useActionState } from "react";
 
+interface DeleteModalState {
+  success?: boolean;
+  errors?: { _form?: string[] };
+}
+
 interface DeleteModalProps {
   opened: boolean;
   onClose: () => void;
   title: string;
   description: string;
-  action: (prevState: unknown, formData: FormData) => Promise<unknown>;
+  action: (prevState: DeleteModalState, formData: FormData) => Promise<DeleteModalState>;
   itemId: string;
   itemName: string;
 }
@@ -23,9 +28,7 @@ export default function DeleteModal({
   itemId,
   itemName,
 }: DeleteModalProps) {
-  const [state, formAction, pending] = useActionState(action, {
-    success: false,
-  } as { success: boolean; errors?: { _form?: string[] } });
+  const [state, formAction, pending] = useActionState(action, {} as DeleteModalState);
 
   const handleSubmit = async (formData: FormData) => {
     formData.append("id", itemId);

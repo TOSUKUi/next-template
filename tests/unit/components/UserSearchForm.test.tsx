@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MantineProvider } from "@mantine/core";
 import { useRouter, useSearchParams } from "next/navigation";
-import UserSearchForm from "@/components/Users/UserSearchForm";
+import UserSearchForm from "@/app/users/_components/UserSearchForm";
 
 // Mock Next.js navigation hooks
 jest.mock("next/navigation", () => ({

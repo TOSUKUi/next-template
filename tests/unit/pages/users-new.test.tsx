@@ -3,14 +3,14 @@ import { MantineProvider } from "@mantine/core";
 import NewUserPage from "@/app/users/new/page";
 
 // UserFormコンポーネントをモック化
-jest.mock("@/components/forms/UserForm", () => {
+jest.mock("@/app/users/[id]/_components/UserForm", () => {
   return function MockUserForm({ mode }: { mode: string }) {
     return <div data-testid="user-form" data-mode={mode}>User Form Mock</div>;
   };
 });
 
 // MainLayoutコンポーネントをモック化
-jest.mock("@/components/Layout/MainLayout", () => {
+jest.mock("@/components/layout/MainLayout", () => {
   return function MockMainLayout({ children }: { children: React.ReactNode }) {
     return <div data-testid="main-layout">{children}</div>;
   };

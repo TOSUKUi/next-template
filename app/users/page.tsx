@@ -1,9 +1,9 @@
 import { Alert, Button, Card, Group, Stack, Text, Title } from "@mantine/core";
 import { IconAlertCircle, IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
-import MainLayout from "@/components/Layout/MainLayout";
-import UserSearchForm from "@/components/Users/UserSearchForm";
-import UserTable from "@/components/Users/UserTable";
+import MainLayout from "@/components/layout/MainLayout";
+import UserSearchForm from "./_components/UserSearchForm";
+import UserTable from "./_components/UserTable";
 import { fetchUsers } from "@/lib/users";
 
 export default async function UsersPage({
